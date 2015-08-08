@@ -43,6 +43,65 @@ int contain_bit(char *longStr,char *shortStr){
 	}
 	return !((bitLong ^ bitShort) & bitShort);//先做异或操作，判断出是谁拥有不同的字符串，再做与操作即可确定
 }
+//借助hashTable法
+int contain_hashTable(char *longStr,char *shortStr){
+	int hash[52] = {0};
+	int num = 0;
+	int i = 0;
+	//扫描短字符串
+	for(i = 0;i < strlen(shortStr);i++){
+		int index = shortStr[i] - 'A';
+		if(hash[index] == 0){
+			hash[index] = 1;
+			num++;
+		}
+	}
+	//扫描长字符串
+	for(i = 0;i < strlen(longStr);i++){
+		int index = longStr[i] - 'A';
+		if(hash[index] == 1){
+			hash[index]  = 0;
+			num--;
+			if(num == 0){
+				break;
+			}
+		}
+	}
+	if(num == 0){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
+//素数方法,不能处理大量字符串,因为使用的unsigned long溢出
+int contain_prime(char * stra, char * strb)
+{
+    int primeNumber[26] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59,
+                           61, 67, 71, 73, 79, 83, 89, 97, 101};
+    unsigned long bigNumber = 1; //too small for use.
+    while (*stra)
+    {
+        bigNumber *= primeNumber[*stra - 'A'];
+        stra++;
+    }
+    while (*strb)
+    {
+        if (0 != (bigNumber % primeNumber[*strb - 'A']))
+        {
+            break;
+        }
+        strb++;
+    }
+    if (*strb)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
 
 int contain_countSort(char *longStr,char *shortStr){
 	int lenLong = strlen(longStr);
@@ -76,9 +135,9 @@ int contain_countSort(char *longStr,char *shortStr){
 int main(){
 	char longStr[50];
 	char shortStr[50];
-	sprintf(longStr,"ABCDFEGADCBHKJIAX");
-	sprintf(shortStr,"CBADIKJIMNM");
-	printf("利用计数排序法：\n");
+	sprintf(longStr,"ABCDFEGADCBHKJIAXCBADIKJIMNMXYZ");
+	sprintf(shortStr,"CBADIKJIMNML");
+	printf("利用计数排序法比较：\n");
 	if(contain_countSort(longStr,shortStr)){
 		printf("包含\n");
 	}else{
@@ -86,6 +145,19 @@ int main(){
 	}
 	printf("利用bit法：\n");
 	if(contain_bit(longStr,shortStr)){
+		printf("包含\n");
+	}else{
+		printf("不包含\n");
+	}
+	printf("借助hash表法：\n");
+	if(contain_hashTable(longStr,shortStr)){
+		printf("包含\n");
+	}else{
+		printf("不包含\n");
+	}
+
+	printf("分配素数法：\n");
+	if(contain_prime(longStr,shortStr)){
 		printf("包含\n");
 	}else{
 		printf("不包含\n");
