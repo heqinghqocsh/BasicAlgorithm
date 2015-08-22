@@ -68,14 +68,12 @@ int partition_rand(long a[],int first,int last){
 	while(first < last){
 		while(first < last && a[last] >= key){
 			last--;
-			swap(&a[first],&a[last]);
 		}
-
+		swap(&a[first],&a[last]);
 		while(first < last && a[first] <= key){
 			first++;
-			swap(&a[first],&a[last]);
 		}
-		
+		swap(&a[first],&a[last]);
 	}
 	return first;
 }
@@ -156,8 +154,12 @@ void main(){
 	long b[NUM + 1];
 	long *a = init();
 	memcpy(b,a,sizeof(a));
-	quick_sort_rand(b,first,last);
-	printf("通过快速排序（随机主元）找到的最小的 %d 个数为：\n",K);
+//	quick_sort_rand(b,first,last);
+//	printf("通过快速排序（随机主元）找到的最小的 %d 个数为：\n",K);
+//	print_K(b,K);
+
+	quick_sort(b,first,last);
+	printf("通过快速排序（固定主元）找到的最小的 %d 个数为：\n",K);
 	print_K(b,K);
 	
 
