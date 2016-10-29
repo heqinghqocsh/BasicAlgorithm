@@ -1,34 +1,34 @@
 #include <stdio.h>
 #include <string.h>
 /*
-ÕûÀíÊ±¼ä£º2015-8-6  by£ºheqinghqocsh
+æ•´ç†æ—¶é—´ï¼š2015-8-6  byï¼šheqinghqocsh
 */
-/*ÌâÄ¿ÃèÊö£º
-	¶¨Òå×Ö·û´®µÄ×óĞı×ª²Ù×÷£º°Ñ×Ö·û´®Ç°ÃæµÄÈô¸É¸ö×Ö·ûÒÆ¶¯µ½×Ö·û´®µÄÎ²²¿£¬
-	Èç°Ñ×Ö·û´®abcdef×óĞı×ª2Î»µÃµ½×Ö·û´®cdefab¡£ÇëÊµÏÖ×Ö·û´®×óĞı×ªµÄº¯Êı£¬
-	ÒªÇó¶Ô³¤¶ÈÎªnµÄ×Ö·û´®²Ù×÷µÄÊ±¼ä¸´ÔÓ¶ÈÎªO(n)£¬¿Õ¼ä¸´ÔÓ¶ÈÎªO(1)¡£ 				
+/*é¢˜ç›®æè¿°ï¼š
+	å®šä¹‰å­—ç¬¦ä¸²çš„å·¦æ—‹è½¬æ“ä½œï¼šæŠŠå­—ç¬¦ä¸²å‰é¢çš„è‹¥å¹²ä¸ªå­—ç¬¦ç§»åŠ¨åˆ°å­—ç¬¦ä¸²çš„å°¾éƒ¨ï¼Œ
+	å¦‚æŠŠå­—ç¬¦ä¸²abcdefå·¦æ—‹è½¬2ä½å¾—åˆ°å­—ç¬¦ä¸²cdefabã€‚è¯·å®ç°å­—ç¬¦ä¸²å·¦æ—‹è½¬çš„å‡½æ•°ï¼Œ
+	è¦æ±‚å¯¹é•¿åº¦ä¸ºnçš„å­—ç¬¦ä¸²æ“ä½œçš„æ—¶é—´å¤æ‚åº¦ä¸ºO(n)ï¼Œç©ºé—´å¤æ‚åº¦ä¸ºO(1)ã€‚ 				
 */
 
-//±©Á¦ÒÆÎ»·¨(¸´ÔÓ¶ÈÎªO(m*n))
+//æš´åŠ›ç§»ä½æ³•(å¤æ‚åº¦ä¸ºO(m*n))
 void violenceShift1(char * arr, int n)
 {
-    size_t tmpLen = strlen(arr);//×¢Òâ´Ë³¤¶È°üº¬½áÊø·û('/0')
+    size_t tmpLen = strlen(arr);//æ³¨æ„æ­¤é•¿åº¦ä¸åŒ…å«ç»“æŸç¬¦('/0')
     char tmpChar;
     int i, j;
-    if (n >= 0)//µ±n´óÓÚ0Ê±£¬Îª×óĞı×ª£¨¼´½«×ó±ßµÄn¸ö×Ö·ûÒÆµ½Ä©Î²£©
+    if (n >= 0)//å½“nå¤§äº0æ—¶ï¼Œä¸ºå·¦æ—‹è½¬ï¼ˆå³å°†å·¦è¾¹çš„nä¸ªå­—ç¬¦ç§»åˆ°æœ«å°¾ï¼‰
     {
 		while(n--){
-			tmpChar = *arr;//±£´æµÚÒ»¸ö×Ö·û
+			tmpChar = *arr;//ä¿å­˜ç¬¬ä¸€ä¸ªå­—ç¬¦
 			for(i = 0; i < tmpLen; i++){
 				*(arr + i) = *(arr + i + 1);
 			}
 			*(arr + tmpLen - 1) = tmpChar;
 		}
     }
-    else//µ±nĞ¡ÓÚ0Ê±£¬ÎªÓÒĞı×ª£¨¼´½«ÓÒ±ßµÄn¸ö×Ö·ûÒÆµ½¿ªÍ·£©
+    else//å½“nå°äº0æ—¶ï¼Œä¸ºå³æ—‹è½¬ï¼ˆå³å°†å³è¾¹çš„nä¸ªå­—ç¬¦ç§»åˆ°å¼€å¤´ï¼‰
     {
 		while(n++){
-			tmpChar = *(arr + tmpLen -1);//¼õÒ»ÊÇÒòÎª×Ö·û´®ÒÔ¡®/0¡¯½áÎ²ÒªÕ¼Ò»Î»
+			tmpChar = *(arr + tmpLen -1);//å‡ä¸€æ˜¯å› ä¸ºå­—ç¬¦ä¸²ä»¥â€˜/0â€™ç»“å°¾è¦å ä¸€ä½
 			for(i = tmpLen - 1; i > 0; i--){
 				*(arr + i) = *(arr + i - 1);
 			}
@@ -36,7 +36,7 @@ void violenceShift1(char * arr, int n)
 		}
     }
 }
-//Ö¸ÕëÒÆÎ»·¨(¸´ÔÓ¶ÈÎªO(m+n))
+//æŒ‡é’ˆç§»ä½æ³•(å¤æ‚åº¦ä¸ºO(m+n))
 void leftShift2(char * arr, int len, int n)
 {
     int i;
@@ -44,7 +44,7 @@ void leftShift2(char * arr, int len, int n)
     int p0 = 0;
     int p1 = n;
     char tmpChar;
-    while (p1 + n - 1 < tmpLen)//ÅĞ¶ÏÊÇ·ñÔ½½ç
+    while (p1 + n - 1 < tmpLen)//åˆ¤æ–­æ˜¯å¦è¶Šç•Œ
     {
         tmpChar = *(arr + p0);
         *(arr + p0) = *(arr + p1);
@@ -52,7 +52,7 @@ void leftShift2(char * arr, int len, int n)
         p0++;
         p1++;
     }
-    while (p1 < tmpLen)//µ±p1Ğ¡ÓÚ×Ö·û´®µÄ³¤¶ÈÊ±Òª´¦ÀíÎ²°Í
+    while (p1 < tmpLen)//å½“p1å°äºå­—ç¬¦ä¸²çš„é•¿åº¦æ—¶è¦å¤„ç†å°¾å·´
     {
         tmpChar = *(arr + p1);
         for (i = p1; i > p0; i--)
@@ -65,7 +65,7 @@ void leftShift2(char * arr, int len, int n)
     }
 }
 
-//Ö¸ÕëÒÆÎ»·¨,Î²²¿´¦ÀíÓÃµİ¹é
+//æŒ‡é’ˆç§»ä½æ³•,å°¾éƒ¨å¤„ç†ç”¨é€’å½’
 void leftShift3(char * arr, int len, int n)
 {
     size_t tmpLen = len;
@@ -86,7 +86,7 @@ void leftShift3(char * arr, int len, int n)
     }
 }
 
-//Ö¸ÕëÒÆÎ»·¨,µİ¹é
+//æŒ‡é’ˆç§»ä½æ³•,é€’å½’
 void leftShift4(char * arr, int len, int n)
 {
     size_t tmpLen = len;
@@ -103,21 +103,21 @@ void leftShift4(char * arr, int len, int n)
         p1++;
     }
     i = n - tmpLen%n;
-    if (i != 0 && p0 != tmpLen - 1)//×îºóÒ»¸öÌõ¼ş±£Ö¤i=n(¼´tmplen%n=0)Ê±µÄÂ©¶´
+    if (i != 0 && p0 != tmpLen - 1)//æœ€åä¸€ä¸ªæ¡ä»¶ä¿è¯i=n(å³tmplen%n=0)æ—¶çš„æ¼æ´
     {
         leftShift4((arr + p0), n, i);
     }
 }
 
-//Èı²½·­×ª·¨
+//ä¸‰æ­¥ç¿»è½¬æ³•
 /*
-Ë¼Â·£º½«Ò»¸ö×Ö·û´®·Ö³ÉÁ½²¿·Ö£¬XºÍYÁ½¸ö²¿·Ö£¬ÔÚ×Ö·û´®ÉÏ¶¨Òå·´×ªµÄ²Ù×÷X^T£¬
-¼´°ÑXµÄËùÓĞ×Ö·û·´×ª£¨Èç£¬X="abc"£¬ÄÇÃ´X^T="cba"£©£¬ÄÇÃ´ÎÒÃÇ¿ÉÒÔµÃµ½ÏÂÃæµÄ½áÂÛ£º(X^TY^T)^T=YX¡£
-ÏÔÈ»ÎÒÃÇÕâ¾Í¿ÉÒÔ×ª»¯Îª×Ö·û´®µÄ·´×ªµÄÎÊÌâÁË¡£ok,¾ÍÄÃabcdef Õâ¸öÀı×ÓÀ´Ëµ£¬ÈôÒªÈÃdef·­×ªµ½abcµÄÇ°Í·
-£¬ÄÇÃ´Ö»Òª°´ÏÂÊö3¸ö²½Öè²Ù×÷¼´¿É£º
-1¡¢Ê×ÏÈ·ÖÎªÁ©²¿·Ö£¬X:abc£¬Y:def£»
-2¡¢X->X^T£¬abc->cba£¬ Y->Y^T£¬def->fed¡£
-3¡¢(X^TY^T)^T=YX£¬cbafed->defabc£¬¼´Õû¸ö·­×ª¡£
+æ€è·¯ï¼šå°†ä¸€ä¸ªå­—ç¬¦ä¸²åˆ†æˆä¸¤éƒ¨åˆ†ï¼ŒXå’ŒYä¸¤ä¸ªéƒ¨åˆ†ï¼Œåœ¨å­—ç¬¦ä¸²ä¸Šå®šä¹‰åè½¬çš„æ“ä½œX^Tï¼Œ
+å³æŠŠXçš„æ‰€æœ‰å­—ç¬¦åè½¬ï¼ˆå¦‚ï¼ŒX="abc"ï¼Œé‚£ä¹ˆX^T="cba"ï¼‰ï¼Œé‚£ä¹ˆæˆ‘ä»¬å¯ä»¥å¾—åˆ°ä¸‹é¢çš„ç»“è®ºï¼š(X^TY^T)^T=YXã€‚
+æ˜¾ç„¶æˆ‘ä»¬è¿™å°±å¯ä»¥è½¬åŒ–ä¸ºå­—ç¬¦ä¸²çš„åè½¬çš„é—®é¢˜äº†ã€‚ok,å°±æ‹¿abcdef è¿™ä¸ªä¾‹å­æ¥è¯´ï¼Œè‹¥è¦è®©defç¿»è½¬åˆ°abcçš„å‰å¤´
+ï¼Œé‚£ä¹ˆåªè¦æŒ‰ä¸‹è¿°3ä¸ªæ­¥éª¤æ“ä½œå³å¯ï¼š
+1ã€é¦–å…ˆåˆ†ä¸ºä¿©éƒ¨åˆ†ï¼ŒX:abcï¼ŒY:defï¼›
+2ã€X->X^Tï¼Œabc->cbaï¼Œ Y->Y^Tï¼Œdef->fedã€‚
+3ã€(X^TY^T)^T=YXï¼Œcbafed->defabcï¼Œå³æ•´ä¸ªç¿»è½¬ã€‚
 */
 void myinvert(char * start, char * end)
 {
@@ -147,7 +147,7 @@ int gcd(int m, int n)
     }
     return n;
 }
-//·Ö×éÑ­»·ÒÆÎ»·¨
+//åˆ†ç»„å¾ªç¯ç§»ä½æ³•
 void leftShift6(char * arr, int len, int n)
 {
     int group = gcd(len, n);
@@ -168,67 +168,67 @@ int main()
 {
     char str[50];
     sprintf(str, "abcdefghijk");
-    printf("Ô­Ê¼×Ö·û´®Îª :%s\t³¤¶ÈÎªÎª :%d\n", str, strlen(str));
+    printf("åŸå§‹å­—ç¬¦ä¸²ä¸º :%s\té•¿åº¦ä¸ºä¸º :%d\n", str, strlen(str));
     printf("\n");
     violenceShift1(str, 2);
-    printf("±©Á¦ÒÆÎ»·¨£¨×óÒÆ2Î»£© :%s\n", str);
+    printf("æš´åŠ›ç§»ä½æ³•ï¼ˆå·¦ç§»2ä½ï¼‰ :%s\n", str);
     violenceShift1(str, -2);
-    printf("±©Á¦ÒÆÎ»·¨£¨ÓÒÒÆ2Î»£© :%s\n", str);
+    printf("æš´åŠ›ç§»ä½æ³•ï¼ˆå³ç§»2ä½ï¼‰ :%s\n", str);
     violenceShift1(str, 3);
-    printf("±©Á¦ÒÆÎ»·¨£¨×óÒÆ3Î»£© :%s\n", str);
+    printf("æš´åŠ›ç§»ä½æ³•ï¼ˆå·¦ç§»3ä½ï¼‰ :%s\n", str);
     violenceShift1(str, strlen(str) - 3);
-    printf("±©Á¦ÒÆÎ»·¨£¨ÓÒÒÆ3Î»£© :%s\n", str);
+    printf("æš´åŠ›ç§»ä½æ³•ï¼ˆå³ç§»3ä½ï¼‰ :%s\n", str);
     printf("\n");
 
     leftShift2(str, strlen(str), 3);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨×óÒÆ3Î»£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆå·¦ç§»3ä½ï¼‰ :%s\n", str);
     leftShift2(str, strlen(str), strlen(str) - 3);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨ÓÒÒÆ3Î»£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆå³ç§»3ä½ï¼‰ :%s\n", str);
     leftShift2(str + 2, strlen(str) - 2, 2);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨´ÓµÚÈıÎ»¿ªÊ¼×óÒÆ2Î»£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆä»ç¬¬ä¸‰ä½å¼€å§‹å·¦ç§»2ä½ï¼‰ :%s\n", str);
     leftShift2(str + 2, strlen(str) - 2, strlen(str) - 2 - 2);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨´ÓµÚÈıÎ»¿ªÊ¼ÓÒÒÆ2Î»£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆä»ç¬¬ä¸‰ä½å¼€å§‹å³ç§»2ä½ï¼‰ :%s\n", str);
     printf("\n");
 
 
     leftShift3(str, strlen(str), 3);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨Î²²¿ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆå°¾éƒ¨ç”¨é€’å½’ï¼‰ :%s\n", str);
     leftShift3(str, strlen(str), strlen(str) - 3);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨Î²²¿ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆå°¾éƒ¨ç”¨é€’å½’ï¼‰ :%s\n", str);
     leftShift3(str + 2, strlen(str) - 2, 2);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨Î²²¿ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆå°¾éƒ¨ç”¨é€’å½’ï¼‰ :%s\n", str);
     leftShift3(str + 2, strlen(str) - 2, strlen(str) - 2 - 2);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨Î²²¿ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆå°¾éƒ¨ç”¨é€’å½’ï¼‰ :%s\n", str);
     printf("\n");
 
     leftShift4(str, strlen(str), 3);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆç”¨é€’å½’ï¼‰ :%s\n", str);
     leftShift4(str, strlen(str), strlen(str) - 3);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆç”¨é€’å½’ï¼‰ :%s\n", str);
     leftShift4(str + 2, strlen(str) - 2, 2);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆç”¨é€’å½’ï¼‰ :%s\n", str);
     leftShift4(str + 2, strlen(str) - 2, strlen(str) - 2 - 2);
-    printf("Ö¸ÕëÒÆÎ»·¨£¨ÓÃµİ¹é£© :%s\n", str);
+    printf("æŒ‡é’ˆç§»ä½æ³•ï¼ˆç”¨é€’å½’ï¼‰ :%s\n", str);
     printf("\n");
 
     leftShift5(str, strlen(str), 3);
-    printf("Èı²½·­×ª·¨ :%s\n", str);
+    printf("ä¸‰æ­¥ç¿»è½¬æ³• :%s\n", str);
     leftShift5(str, strlen(str), strlen(str) - 3);
-    printf("Èı²½·­×ª·¨ :%s\n", str);
+    printf("ä¸‰æ­¥ç¿»è½¬æ³• :%s\n", str);
     leftShift5(str + 2, strlen(str) - 2, 2);
-    printf("Èı²½·­×ª·¨ :%s\n", str);
+    printf("ä¸‰æ­¥ç¿»è½¬æ³• :%s\n", str);
     leftShift5(str + 2, strlen(str) - 2, strlen(str) - 2 - 2);
-    printf("Èı²½·­×ª·¨ :%s\n", str);
+    printf("ä¸‰æ­¥ç¿»è½¬æ³• :%s\n", str);
     printf("\n");
 
     leftShift6(str, strlen(str), 3);
-    printf("·Ö×éÑ­»·ÒÆÎ»·¨ :%s\n", str);
+    printf("åˆ†ç»„å¾ªç¯ç§»ä½æ³• :%s\n", str);
     leftShift6(str, strlen(str), strlen(str) - 3);
-    printf("·Ö×éÑ­»·ÒÆÎ»·¨ :%s\n", str);
+    printf("åˆ†ç»„å¾ªç¯ç§»ä½æ³• :%s\n", str);
     leftShift6(str + 2, strlen(str) - 2, 2);
-    printf("·Ö×éÑ­»·ÒÆÎ»·¨ :%s\n", str);
+    printf("åˆ†ç»„å¾ªç¯ç§»ä½æ³• :%s\n", str);
     leftShift6(str + 2, strlen(str) - 2, strlen(str) - 2 - 2);
-    printf("·Ö×éÑ­»·ÒÆÎ»·¨ :%s\n", str);
+    printf("åˆ†ç»„å¾ªç¯ç§»ä½æ³• :%s\n", str);
     printf("\n");
 
 
